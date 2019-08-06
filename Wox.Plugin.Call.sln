@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wox.Plugin.Call", "Wox.Plugin.Call.csproj", "{DA5B1A47-F17C-41BF-91A1-648E34C7D290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA5B1A47-F17C-41BF-91A1-648E34C7D290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5B1A47-F17C-41BF-91A1-648E34C7D290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5B1A47-F17C-41BF-91A1-648E34C7D290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5B1A47-F17C-41BF-91A1-648E34C7D290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D84D0BBA-6405-4A75-951F-8003D21ED410}
+	EndGlobalSection
+EndGlobal

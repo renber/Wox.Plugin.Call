@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Wox.Plugin.Call.Controls.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wox.Plugin.Call.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+            <TextBlock Text="Call command template ({name} and {number} will be replaced accordingly):" />
+            <TextBox Text="{Binding CallCommandTemplate}" Margin="5 0 0 0" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Text="Address book:" />
+
+        <ListView x:Name="listView" ItemsSource="{Binding Entries}"  Grid.Row="2" Margin="5 0 0 5">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Name" Width="250">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Call number" Width="250">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Number}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Command="{Binding AddEntryCommand}" Content="Add antry" Padding="5 2" Margin="0 0 5 0" />
+            <Button Command="{Binding RemoveEntryCommand}" CommandParameter="{Binding SelectedItem, ElementName=listView}" Content="Remove entry" Padding="5 2" />
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

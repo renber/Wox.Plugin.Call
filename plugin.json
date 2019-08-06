@@ -1,0 +1,12 @@
+﻿{
+	"ID": "4B1A0242-DF69-4B93-9E2E-077189284BE6",
+	"ActionKeyword": "call",
+	"Name": "Phone Caller",
+	"Description": "Invoke phone calls over the tel:// protocol handler",
+	"Author": "René Bergelt",
+	"Version": "1.0.0",
+	"Language": "csharp",
+	"Website": "https://github.com/dewinterjack/Wox.Plugin.TimeChecker",
+	"IcoPath": "Images/callIcon.png",
+	"ExecuteFileName": "Wox.Plugin.Call.dll"
+}
