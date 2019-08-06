@@ -26,17 +26,33 @@ namespace Wox.Plugin.Call
         public List<Result> Query(Query query)
         {
             var lst = new List<Result>();
-            lst.Add(new Result
+            if (query.Terms.Length > 1)
             {
-                Title = String.Join(" ", query.Terms.Skip(1)) + " anrufen",
-                SubTitle = String.Join(" ", query.Terms.Skip(1)) + " wählen",
-                IcoPath = callIcon,
-                Action = _ =>
+                lst.Add(new Result
                 {
-                    DoCall(new Entry("", String.Join(" ", query.Terms)));
-                    return true;
-                }
-            });
+                    Title = String.Join(" ", query.Terms.Skip(1)) + " anrufen",
+                    SubTitle = String.Join(" ", query.Terms.Skip(1)) + " wählen",
+                    IcoPath = callIcon,
+                    Action = _ =>
+                    {
+                        DoCall(new Entry("", String.Join(" ", query.Terms)));
+                        return true;
+                    }
+                });
+            } else
+            {
+                lst.Add(new Result
+                {
+                    Title = String.Join(" ", query.Terms) + " <name>",
+                    SubTitle = "Angegebenen Kontakt anrufen",
+                    IcoPath = callIcon,
+                    Score = 0,
+                    Action = _ =>
+                    {
+                        return false;
+                    }
+                });
+            }
 
             var contactResults = FindMatches(query.Terms.Skip(1).ToArray());
             lst.AddRange(contactResults.Select( entry => new Result
@@ -55,7 +71,7 @@ namespace Wox.Plugin.Call
 
         private IEnumerable<Entry> FindMatches(string[] searchTerms)
         {            
-            return settings.Entries.Where(entry => Matches(entry, searchTerms)).OrderBy(x => x.Name).Take(5);
+            return settings.Entries.Where(entry => Matches(entry, searchTerms)).OrderBy(x => x.Name);
         }
 
         private bool Matches(Entry entry, string[] searchTerms)

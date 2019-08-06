@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using Wox.Plugin.Call.Infrastructure;
 
@@ -13,7 +15,10 @@ namespace Wox.Plugin.Call.ViewModels
     {
         CallPluginSettings Model { get; }
 
-        public ObservableCollection<EntryViewModel> Entries { get; }
+        private ObservableCollection<EntryViewModel> Entries { get; }
+
+        private CollectionViewSource entriesViewSource;
+        public ICollectionView EntriesView => entriesViewSource.View;
 
         public string CallCommandTemplate
         {
@@ -35,6 +40,10 @@ namespace Wox.Plugin.Call.ViewModels
         {
             Model = settings;
             Entries = new SyncCollection<EntryViewModel, Entry>(settings.Entries, (m) => new EntryViewModel(m), (vm) => vm.Model);
+
+            entriesViewSource = new CollectionViewSource();            
+            entriesViewSource.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            entriesViewSource.Source = Entries;
 
             AddEntryCommand = new RelayCommand(() => Entries.Add(new EntryViewModel(new Entry("New entry", "na"))));
             RemoveEntryCommand = new RelayCommand<EntryViewModel>((entry) => Entries.Remove(entry), (entry) => entry != null);

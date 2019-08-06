@@ -19,9 +19,9 @@
             <TextBox Text="{Binding CallCommandTemplate}" Margin="5 0 0 0" />
         </StackPanel>
 
-        <TextBlock Grid.Row="1" Text="Address book:" />
+        <TextBlock Grid.Row="1" Text="Contacts:" />
 
-        <ListView x:Name="listView" ItemsSource="{Binding Entries}"  Grid.Row="2" Margin="5 0 0 5">
+        <ListView x:Name="listView" ItemsSource="{Binding EntriesView}"  Grid.Row="2" Margin="5 0 0 5">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
