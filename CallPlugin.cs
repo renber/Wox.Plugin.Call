@@ -33,6 +33,7 @@ namespace Wox.Plugin.Call
                     Title = String.Join(" ", query.Terms.Skip(1)) + " anrufen",
                     SubTitle = String.Join(" ", query.Terms.Skip(1)) + " wählen",
                     IcoPath = callIcon,
+                    Score = int.MaxValue,
                     Action = _ =>
                     {
                         DoCall(new Entry("", String.Join(" ", query.Terms)));
@@ -55,17 +56,20 @@ namespace Wox.Plugin.Call
             }
 
             var contactResults = FindMatches(query.Terms.Skip(1).ToArray());
-            lst.AddRange(contactResults.Select( entry => new Result
+            foreach(var entry in contactResults)
             {
-                Title = entry.Name + " anrufen",
-                SubTitle = entry.Number + " wählen",                 
-                IcoPath = callIcon,
-                Action = _ =>
+                lst.Add(new Result
                 {
-                    DoCall(entry);
-                    return true;
-                }
-            }));
+                    Title = entry.Name + " anrufen",
+                    SubTitle = entry.Number + " wählen",
+                    IcoPath = callIcon,                    
+                    Action = _ =>
+                    {
+                        DoCall(entry);
+                        return true;
+                    }
+                });
+            }            
             return lst;
         }
 
